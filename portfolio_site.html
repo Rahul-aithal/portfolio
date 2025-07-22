@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rahul Aithal | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-b from-black via-zinc-900 to-neutral-900 text-white min-h-screen">
+  <!-- Hero -->
+  <section class="text-center py-16">
+    <h1 class="text-4xl font-bold">Rahul Aithal</h1>
+    <p class="text-gray-400 mt-2">Full Stack Developer | MERN | Cloud | DevOps</p>
+    <div class="mt-4 space-x-4">
+      <a href="mailto:aithalrahul34@gmail.com" class="underline">aithalrahul34@gmail.com</a>
+      <a href="https://github.com/Rahul-aithal" class="underline">GitHub</a>
+      <a href="https://www.linkedin.com/in/rahul-aithal-b67b5b253/" class="underline">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="max-w-3xl mx-auto px-4 py-8">
+    <h2 class="text-xl font-semibold mb-2">About Me</h2>
+    <p class="text-gray-300 text-sm">
+      Backend-focused Full-Stack Developer passionate about designing scalable systems and automation pipelines. Strong
+      in building backend services with Node.js and Python. Experienced in integrating Redis, MongoDB, Docker, and AWS.
+      Interested in infrastructure tools, real-time apps, and compiler-level control with C++.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section class="max-w-3xl mx-auto px-4 py-8">
+    <h2 class="text-xl font-semibold mb-4">Skills</h2>
+    <ul class="grid grid-cols-2 gap-2 text-sm text-gray-300">
+      <li>JavaScript / TypeScript</li>
+      <li>React.js / Tailwind / Chakra UI</li>
+      <li>Node.js / Express.js / FastAPI</li>
+      <li>MongoDB / PostgreSQL / Redis</li>
+      <li>Docker / AWS EC2 / Vercel</li>
+      <li>n8n / Baileys / Docxtemplater</li>
+      <li>Git / GitHub / API Integration</li>
+      <li>RabbitMQ / Real-Time Systems</li>
+    </ul>
+  </section>
+
+  <!-- Selected Projects -->
+  <section class="max-w-3xl mx-auto px-4 py-8">
+    <h2 class="text-xl font-semibold mb-4">Selected Projects</h2>
+
+    <div class="space-y-6">
+      <div>
+        <h3 class="font-semibold">InkWell App</h3>
+        <p class="text-sm text-gray-300">A real-time collaborative blogging platform. Includes JWT authentication,
+          Markdown editor with preview, Cloudinary uploads, and RabbitMQ for real-time notifications. Deployed using
+          Vercel.</p>
+        <a href="https://ink-well-client.vercel.app/" class="text-blue-400 underline text-sm">Live App</a>
+      </div>
+      <div>
+        <h3 class="font-semibold">WhatsApp News Bot <span class="italic text-xs text-gray-400">(Prototype)</span></h3>
+        <p class="text-sm text-gray-300">Created an automated WhatsApp bot using Baileys. Gathers top headlines from
+          news APIs, summarizes them, and sends them as scheduled broadcast messages.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold">Report Generation Tool <span class="italic text-xs text-gray-400">(Prototype)</span>
+        </h3>
+        <p class="text-sm text-gray-300">Built a backend service using Python and Docxtemplater that dynamically
+          generates formatted Word reports from structured JSON. Supports image parsing and batch automation.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold">HashVault LMS</h3>
+        <p class="text-sm text-gray-300">Built a custom learning management system supporting secure video playback,
+          user authentication, Redis caching, and optimized HLS delivery. Designed for scalability and high
+          availability.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold">E-Commerce App</h3>
+        <p class="text-sm text-gray-300">Developed a full-stack shopping website with product filtering, responsive UI
+          using Chakra UI, and user experience enhancements like light/dark toggle. Connected with REST APIs.</p>
+        <a href="https://github.com/Rahul-aithal/ByHere-E-Commerce-website"
+          class="text-blue-400 underline text-sm">GitHub Repo</a>
+      </div>
+      <div>
+        <h3 class="font-semibold">CLI Tools Collection (C++)</h3>
+        <ul class="list-disc list-inside text-sm text-gray-300">
+          <li><a class="underline" href="https://github.com/Rahul-aithal/Mini-file-viewer">Mini File Viewer</a> –
+            Converts any file to readable and hexadecimal output.</li>
+          <li><a class="underline" href="https://github.com/Rahul-aithal/Todo-In-CPP">Todo CLI App</a> – Basic terminal
+            to-do tracker with status toggles.</li>
+          <li><a class="underline" href="https://github.com/Rahul-aithal/File-Inspector-CLI">File Inspector</a> –
+            Provides meta info: type, size, permissions.</li>
+          <li><a class="underline" href="https://github.com/Rahul-aithal/hex-viewer">Hex Viewer</a> – CLI tool to view
+            file contents in hexadecimal format.</li>
+        </ul>
+        <p class="text-sm text-gray-300 mt-1">All written in C++ with clean formatting, file streams, and I/O buffers.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="max-w-3xl mx-auto px-4 py-8">
+    <h2 class="text-xl font-semibold mb-4">Education</h2>
+    <p class="text-sm text-gray-300">BNMIT College, Bengaluru — B.E. in Computer Science & Engineering</p>
+    <p class="text-sm text-gray-300">2023 – Present | CGPA: 9.2 | Currently in 5th Semester</p>
+  </section>
+
+  <!-- Resume Download -->
+  <section class="text-center py-8">
+    <a href="./assets/Resume.pdf" download class="bg-white text-black px-6 py-2 rounded font-semibold">Download Resume
+      (PDF)</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-xs text-gray-500 py-4">
+    &copy; 2025 Rahul Aithal
+  </footer>
+</body>
+
+</html>
