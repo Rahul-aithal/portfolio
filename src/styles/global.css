@@ -4,41 +4,44 @@
   --font-mono: "IBM Plex Mono", monospace;
   --font-sans: "IBM Plex Sans", sans-serif;
 
-  /* surfaces — near-black, warmed slightly instead of a neutral/cool black */
-  --color-surface: oklch(15% 0.014 55);
-  --color-surface-2: oklch(19% 0.015 55);
-  --color-surface-hover: oklch(21% 0.016 55);
-  --color-watermark: oklch(19% 0.014 58);
-  --color-watermark-hover: oklch(22% 0.015 58);
+  /* surfaces — near-black, warmed slightly, with clearly stepped-up tiers
+     so cards actually separate from the page instead of blending into it */
+  --color-surface: oklch(12% 0.012 50);
+  --color-surface-2: oklch(17% 0.014 55);
+  --color-surface-hover: oklch(20% 0.016 55);
+  --color-watermark: oklch(18% 0.012 55);
+  --color-watermark-hover: oklch(22% 0.014 55);
 
-  /* text — a warm-tinted gray ramp instead of flat neutral grays */
-  --color-ink: oklch(93% 0.007 85);
-  --color-ink-1: oklch(76% 0.007 85);
-  --color-ink-2: oklch(58% 0.006 85);
-  --color-ink-3: oklch(48% 0.006 82);
-  --color-ink-4: oklch(40% 0.006 80);
-  --color-dim: oklch(52% 0.007 80);
-  --color-dimmer: oklch(30% 0.007 75);
+  /* text — a warm-tinted gray ramp, pulled brighter across the board so
+     body copy stays legible on the dark surfaces */
+  --color-ink: oklch(95% 0.006 85);
+  --color-ink-1: oklch(82% 0.008 85);
+  --color-ink-2: oklch(68% 0.007 85);
+  --color-ink-3: oklch(58% 0.007 82);
+  --color-ink-4: oklch(50% 0.007 80);
+  --color-dim: oklch(60% 0.008 80);
+  --color-dimmer: oklch(38% 0.008 75);
 
-  --color-line: oklch(26% 0.012 65);
-  --color-line-hover: oklch(34% 0.016 62);
+  --color-line: oklch(32% 0.014 65);
+  --color-line-hover: oklch(42% 0.018 62);
 
-  /* accents — phosphor amber (primary) + a muted dusty-cyan signal tone
-     standing in for the old acid-green, so it reads as "terminal" without
-     tipping into the neon-green-on-black cliché */
-  --color-amber: oklch(78% 0.15 70);
-  --color-amber-dim: oklch(55% 0.11 70);
-  --color-signal: oklch(72% 0.09 195);
+  /* accents — vivid phosphor amber (primary) + a brighter teal-green signal
+     tone standing in for the old acid-green. Still not neon, but no longer
+     so desaturated it reads as gray */
+  --color-amber: oklch(80% 0.17 72);
+  --color-amber-dim: oklch(58% 0.13 72);
+  --color-signal: oklch(78% 0.14 175);
 
-  /* "latest" project wash + badge */
-  --color-wash: oklch(16% 0.03 70);
-  --color-wash-hover: oklch(19% 0.032 70);
-  --color-wash-line: oklch(19% 0.045 70);
-  --color-wash-line-hover: oklch(25% 0.05 70);
-  --color-badge: oklch(13% 0.06 70);
-  --color-badge-line: oklch(24% 0.08 70);
+  /* "latest" project wash + badge — more saturated so it clearly reads as
+     a distinct, highlighted card rather than a slightly-darker one */
+  --color-wash: oklch(18% 0.05 72);
+  --color-wash-hover: oklch(21% 0.055 72);
+  --color-wash-line: oklch(30% 0.08 72);
+  --color-wash-line-hover: oklch(38% 0.09 72);
+  --color-badge: oklch(20% 0.09 72);
+  --color-badge-line: oklch(38% 0.12 72);
 
-  --color-tag-line: oklch(20% 0.01 60);
+  --color-tag-line: oklch(28% 0.015 60);
 
   --animate-blink: blink 2s ease-in-out infinite;
   --animate-blink-fast: blink 1s step-end infinite;
