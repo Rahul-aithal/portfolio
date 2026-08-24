@@ -1,0 +1,27 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+const groups: { label: string; lines: string[] }[] = [
+  { label: 'Languages', lines: ['JavaScript · TypeScript', 'Go · C++ · Python · SQL'] },
+  { label: 'Frontend', lines: ['React.js', 'Tailwind CSS · Chakra UI'] },
+  { label: 'Backend', lines: ['Node.js · Express', 'NestJS · FastAPI'] },
+  { label: 'Databases', lines: ['MongoDB · Redis', 'PostgreSQL'] },
+  { label: 'DevOps / Cloud', lines: ['Docker · AWS EC2', 'Vercel · GitHub Actions'] },
+  { label: 'Tools', lines: ['n8n · RabbitMQ', 'FFmpeg · MCP SDK'] },
+];
+---
+
+<section class="border-b border-line py-12">
+  <SectionHeader num="04" title="Stack" />
+
+  <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-0.5 max-[600px]:grid-cols-2">
+    {
+      groups.map((group) => (
+        <div class="border border-line bg-surface-2 px-5 py-4.5">
+          <div class="mb-2.5 text-[9px] tracking-[0.2em] text-amber uppercase">{group.label}</div>
+          <div class="font-sans text-[13px] leading-[1.9] font-light text-ink-4" set:html={group.lines.join('<br />')} />
+        </div>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,48 @@
+---
+const links = [
+  { label: 'GitHub', href: 'https://github.com/Rahul-aithal' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rahul-aithal-b67b5b253/' },
+  { label: 'Medium', href: 'https://medium.com/@aithalrahul34' },
+  { label: 'Email', href: 'mailto:aithalrahul34@gmail.com' },
+];
+---
+
+<section class="border-b border-line py-16 pb-12 max-[600px]:py-10 max-[600px]:pb-8">
+  <div class="mb-4 text-[10px] tracking-[0.25em] text-dim">// IDENTIFICATION</div>
+
+  <h1
+    class="mb-2 leading-none font-bold tracking-tight text-ink"
+    style="font-size: clamp(36px, 6vw, 64px);"
+  >
+    RAHUL<br />
+    <span class="text-amber [text-shadow:0_0_24px_oklch(78%_0.15_70_/_0.35)]">AITHAL</span>
+    <span
+      class="ml-1 inline-block h-[0.8em] w-[3px] animate-blink-fast align-middle bg-amber"
+    ></span>
+  </h1>
+
+  <div class="mb-8 text-[11px] tracking-[0.08em] text-dim">
+    FULLSTACK DEVELOPER &nbsp;·&nbsp; <em class="text-signal not-italic">SYSTEMS BUILDER</em> &nbsp;·&nbsp; BENGALURU
+  </div>
+
+  <p class="max-w-[600px] border-l-2 border-amber pl-5 font-sans text-[15px] leading-[1.8] font-light text-ink-2">
+    Third-year CS student who builds things to understand how they work. Backend systems,
+    full-stack products, the occasional low-level rabbit hole. Just wrapped up a production
+    internship, <strong class="font-normal text-ink-1">learning Go properly</strong>, and getting
+    pulled into AI tooling whether I planned to or not.
+  </p>
+
+  <div class="mt-7 flex flex-wrap gap-6">
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          target="_blank"
+          class="border-b border-dimmer pb-0.5 text-[11px] tracking-[0.12em] text-dim uppercase transition-colors duration-150 hover:border-amber hover:text-amber"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </div>
+</section>

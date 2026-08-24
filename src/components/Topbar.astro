@@ -1,0 +1,32 @@
+---
+---
+
+<div
+  class="sticky top-0 z-100 flex items-center justify-between border-b border-line bg-surface px-10 py-2.5 text-[11px] tracking-wider text-dim max-[600px]:px-5"
+>
+  <div class="flex items-center gap-6">
+    <span class="font-semibold text-amber">Rahul-aithal</span>
+    <span>BENGALURU / IN</span>
+  </div>
+  <div class="flex items-center gap-5">
+    <span>
+      <span class="mr-1.5 inline-block h-1.5 w-1.5 animate-blink rounded-full bg-signal"></span>AVAILABLE
+    </span>
+    <span id="clock"></span>
+  </div>
+</div>
+
+<script>
+  function tick() {
+    const t = new Date().toLocaleTimeString('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZone: 'Asia/Kolkata',
+    });
+    const el = document.getElementById('clock');
+    if (el) el.textContent = t + ' IST';
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>

@@ -1,0 +1,11 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import ProjectCard from './ProjectCard.astro';
+import { projects } from '../data/projects';
+---
+
+<section class="border-b border-line py-12">
+  <SectionHeader num="03" title="Things I've Built" />
+
+  {projects.map((project, i) => <ProjectCard {...project} delay={0.05 + i * 0.05} />)}
+</section>

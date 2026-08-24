@@ -1,0 +1,60 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+interface Job {
+  role: string;
+  company: string;
+  location: string;
+  period: string;
+  bullets: string[];
+  tags: string[];
+}
+
+// Newest role first.
+const jobs: Job[] = [
+  {
+    role: 'Full-Stack Developer Intern',
+    company: 'Pragya Cyber Ltd.',
+    location: 'Bengaluru',
+    period: 'Jan 2025 – Apr 2026',
+    bullets: [
+      'Built and maintained core modules of a <strong>B2B SaaS platform</strong>, contributing across frontend, backend, and automation layers.',
+      'Designed a structured data management system with <strong>dynamic, customisable templates</strong> to streamline internal team workflows.',
+      'Developed a stakeholder-facing portal with <strong>real-time progress tracking</strong> and versioned result views.',
+      'Implemented an end-to-end <strong>automated document export pipeline</strong> using Docxtemplater for consistent client deliverables.',
+      'Contributed to early planning and exploration of <strong>LLM-based automation workflows</strong>.',
+    ],
+    tags: ['Node.js', 'NestJS', 'React', 'MongoDB', 'Docxtemplater', 'n8n', 'AWS'],
+  },
+];
+---
+
+<section class="border-b border-line py-12">
+  <SectionHeader num="02" title="Experience" />
+
+  <div class="flex flex-col gap-10">
+    {
+      jobs.map((job) => (
+        <div class="border-l border-line pl-6">
+          <div class="text-xs font-semibold tracking-wide text-ink">{job.role}</div>
+          <div class="mt-1 mb-4 text-[10px] tracking-wider text-dim">
+            <em class="text-amber not-italic">{job.company}</em> &nbsp;·&nbsp; {job.location} &nbsp;·&nbsp; {job.period}
+          </div>
+          <ul class="flex flex-col gap-2.5">
+            {job.bullets.map((bullet) => (
+              <li
+                class="relative pl-4 font-sans text-[13.5px] leading-[1.75] font-light text-ink-4 before:absolute before:left-0 before:text-dimmer before:content-['–'] [&_strong]:font-normal [&_strong]:text-ink-1"
+                set:html={bullet}
+              />
+            ))}
+          </ul>
+          <div class="mt-4.5 flex flex-wrap gap-2">
+            {job.tags.map((tag) => (
+              <span class="border border-tag-line px-[7px] py-0.5 text-[10px] tracking-wider text-dimmer">{tag}</span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
