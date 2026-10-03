@@ -145,7 +145,7 @@ body {
 :root {
   --spot-x: 50vw;
   --spot-y: 20vh;
-  --spot-glow: color-mix(in oklch, var(--color-blue) 13%, transparent);
+  --spot-glow: color-mix(in oklch, var(--color-blue) 22%, transparent);
 }
 
 .dark {
@@ -162,9 +162,14 @@ body {
     var(--spot-glow),
     transparent 70%
   );
-  mix-blend-mode: screen;
+  /* multiply reads on light paper; screen reads on the dark sheet */
+  mix-blend-mode: multiply;
   opacity: 0;
   transition: opacity 0.5s ease;
+}
+
+.dark #spotlight {
+  mix-blend-mode: screen;
 }
 
 #spotlight.on {
