@@ -4,10 +4,10 @@ export interface ProjectLink {
 }
 
 export interface Project {
-  /** Build order, shown as the big watermark digit — NOT the display order below. */
+  /** Build order, shown as the "FIG. NN" label — NOT the display order below. */
   num: string;
   name: string;
-  /** Shows the "latest" badge. Only set this on one project at a time. */
+  /** Shows the "Latest" stamp. Only set this on one project at a time. */
   featured?: boolean;
   /** Can contain inline <strong>...</strong> for emphasis. */
   story: string;

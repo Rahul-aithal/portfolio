@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# AI-friendly profile endpoints (same content as the portfolio page)
+# Full profile as Markdown: /agent.md
+# LLM index: /llms.txt
+# Full text for language models: /llms-full.txt

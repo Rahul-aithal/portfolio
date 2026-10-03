@@ -6,7 +6,17 @@ interface Props {
 const { year = new Date().getFullYear() } = Astro.props;
 ---
 
-<div class="flex justify-between pt-10 text-[10px] tracking-wider text-dimmer max-[600px]:flex-col max-[600px]:gap-2">
-  <span>© {year} RAHUL AITHAL</span>
-  <span>BNMIT CSE · 8.9 CGPA</span>
-</div>
+<footer class="mt-12 border-2 border-line-strong bg-surface font-mono text-[10.5px] tracking-[0.15em] uppercase" data-reveal>
+  <div class="grid grid-cols-2 max-[600px]:grid-cols-1">
+    <div class="border-b border-line px-4 py-3 font-semibold text-ink max-[600px]:border-b">
+      © {year} Rahul Aithal
+    </div>
+    <div class="border-b border-line px-4 py-3 text-muted max-[600px]:border-l-0 min-[601px]:border-l min-[601px]:text-right">
+      BNMIT CSE · 8.9 CGPA
+    </div>
+    <div class="px-4 py-3 text-muted">Sheet 01 / 01</div>
+    <div class="px-4 py-3 text-muted min-[601px]:border-l min-[601px]:border-line min-[601px]:text-right">
+      Scale 1:1 — drawn & built by hand
+    </div>
+  </div>
+</footer>

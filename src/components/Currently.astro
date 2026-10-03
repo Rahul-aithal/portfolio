@@ -1,30 +1,29 @@
 ---
 import SectionHeader from './SectionHeader.astro';
-
-// Add/remove lines here — no other file needs to change.
-const items: string[] = [
-  'Wrapped up a 15-month internship at a cybersecurity firm — shipped a <strong>B2B SaaS platform</strong> across the full stack. Real production, real users, real deadlines.',
-  '<strong>Actively looking</strong> for full-time or internship roles in backend, full-stack, or developer tooling.',
-  'Going deeper into <strong>Go</strong> — concurrency, the runtime, why it makes systems people so happy.',
-  'Building with <strong>MCP and LLM tooling</strong> — wiring AI into real products without things falling apart.',
-  'Writing on <strong>Medium</strong> when I have something worth saying.',
-];
+import { currently } from '../data/profile';
 ---
 
-<section class="border-b border-line py-12">
-  <SectionHeader num="01" title="Currently" />
+<section class="border-b-2 border-line-strong py-12" aria-labelledby="section-currently">
+  <SectionHeader num="01" title="Currently" id="section-currently" />
 
-  <div class="flex flex-col gap-4.5 border-l border-line pl-6">
+  <ul class="border-2 border-line-strong bg-surface" data-reveal>
     {
-      items.map((text) => (
-        <div class="flex items-baseline gap-3.5">
-          <span class="shrink-0 text-[10px] text-amber">→</span>
+      currently.map((text, i) => (
+        <li
+          class:list={[
+            'flex items-baseline gap-4 px-6 py-4',
+            i > 0 && 'border-t border-line',
+          ]}
+        >
+          <span class="font-mono text-[11px] font-semibold text-blue-deep tabular-nums" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
           <span
-            class="font-sans text-sm leading-[1.7] font-light text-ink-3 [&_strong]:font-normal [&_strong]:text-ink-1"
+            class="text-[15px] leading-[1.7] font-light text-ink-1 [&_strong]:font-medium [&_strong]:text-ink"
             set:html={text}
           />
-        </div>
+        </li>
       ))
     }
-  </div>
+  </ul>
 </section>

@@ -1,46 +1,44 @@
-# Astro Starter Kit: Basics
+# Rahul Aithal — Portfolio
+
+A blueprint-style Astro site with production details, projects, skills, and public contact links.
+Served from the site root (`/`), ready for a custom domain.
+
+## Development
 
 ```sh
-bun create astro@latest -- --template basics
+bun install
+bun run astro dev --background
+bun run astro dev status
+bun run astro dev logs
+bun run astro dev stop
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Use `bun run build` for a production build and `bun run preview` to inspect it.
 
-## 🚀 Project Structure
+## Custom domain
 
-Inside of your Astro project, you'll see the following folders and files:
+The site is served at `/` on `https://rahulaithal.site` (see `public/CNAME`).
+DNS must point at GitHub Pages: `A` records `@` → `185.199.108.153`,
+`185.199.109.153`, `185.199.110.153`, `185.199.111.153` (and a `CNAME`
+`www` → `rahulaithal.site` if you want www too). Then enable the custom
+domain in repo Settings → Pages so GitHub provisions HTTPS.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## LLM-friendly outputs
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+The site exposes the same professional context in several machine-friendly forms.
+All links are root-relative so the site works unchanged on any domain:
 
-## 🧞 Commands
+- `/` — semantic HTML with Schema.org `ProfilePage` metadata
+- `/agent.md` — complete Markdown profile
+- `/llms.txt` — concise LLM index
+- `/llms-full.txt` — full-text LLM profile
 
-All commands are run from the root of the project, from a terminal:
+The page also includes a **Copy for AI agent** button that copies the Markdown context to the clipboard.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
+Content shown on the page and used by the AI brief is centralized in:
 
-## 👀 Want to learn more?
+- `src/data/profile.ts`
+- `src/data/projects.ts`
+- `src/data/site.ts`
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Astro documentation: <https://docs.astro.build>

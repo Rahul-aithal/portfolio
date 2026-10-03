@@ -1,27 +1,35 @@
 ---
 import SectionHeader from './SectionHeader.astro';
-
-const groups: { label: string; lines: string[] }[] = [
-  { label: 'Languages', lines: ['JavaScript · TypeScript', 'Go · C++ · Python · SQL'] },
-  { label: 'Frontend', lines: ['React.js', 'Tailwind CSS · Chakra UI'] },
-  { label: 'Backend', lines: ['Node.js · Express', 'NestJS · FastAPI'] },
-  { label: 'Databases', lines: ['MongoDB · Redis', 'PostgreSQL'] },
-  { label: 'DevOps / Cloud', lines: ['Docker · AWS EC2', 'Vercel · GitHub Actions'] },
-  { label: 'Tools', lines: ['n8n · RabbitMQ', 'FFmpeg · MCP SDK'] },
-];
+import { skillGroups } from '../data/profile';
 ---
 
-<section class="border-b border-line py-12">
-  <SectionHeader num="04" title="Stack" />
+<section class="border-b-2 border-line-strong py-12" aria-labelledby="section-stack">
+  <SectionHeader num="04" title="Stack" id="section-stack" />
 
-  <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-0.5 max-[600px]:grid-cols-2">
+  <div class="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4 max-[600px]:grid-cols-2 max-[600px]:gap-3">
     {
-      groups.map((group) => (
-        <div class="border border-line bg-surface-2 px-5 py-4.5">
-          <div class="mb-2.5 text-[9px] tracking-[0.2em] text-amber uppercase">{group.label}</div>
-          <div class="font-sans text-[13px] leading-[1.9] font-light text-ink-4" set:html={group.lines.join('<br />')} />
-        </div>
-      ))
+      skillGroups.map((group, i) => {
+        const headingId = `skill-${group.label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+        return (
+          <section
+            class="border-2 border-line-strong bg-surface transition-all duration-150 hover:-translate-y-0.5 hover:border-blue-deep"
+            aria-labelledby={headingId}
+            data-reveal
+            style={`transition-delay: ${i * 60}ms`}
+          >
+            <h3
+              id={headingId}
+              class="border-b-2 border-line-strong bg-ink px-4 py-2 font-mono text-[10px] font-semibold tracking-[0.2em] text-paper uppercase"
+            >
+              {group.label}
+            </h3>
+            <div
+              class="px-4 py-3 text-[13.5px] leading-[1.9] font-light text-ink-1"
+              set:html={group.lines.join('<br />')}
+            />
+          </section>
+        );
+      })
     }
   </div>
 </section>

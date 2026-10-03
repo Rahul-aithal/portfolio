@@ -1,0 +1,77 @@
+---
+const tabs = [
+  { num: '01', label: 'Currently', href: '#section-currently' },
+  { num: '02', label: 'Experience', href: '#section-experience' },
+  { num: '03', label: 'Projects', href: '#section-things-i-ve-built' },
+  { num: '04', label: 'Stack', href: '#section-stack' },
+  { num: 'A', label: 'Appendix', href: '#agent-brief-heading' },
+];
+---
+
+<nav aria-label="Sections" class="border-t border-line">
+  <div class="mx-auto max-w-[920px] px-8 max-[600px]:px-5">
+    <ul
+      data-section-nav
+      class="flex gap-1 overflow-x-auto py-1 whitespace-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    >
+      {
+        tabs.map((tab) => (
+          <li class="shrink-0">
+            <a href={tab.href} class="section-tab">
+              <span class="section-tab-num" aria-hidden="true">
+                {tab.num}
+              </span>
+              {tab.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    const nav = document.querySelector('[data-section-nav]');
+    if (!nav) return;
+    const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+    const targets = links
+      .map((a) => document.querySelector(a.getAttribute('href') ?? ''))
+      .filter((el): el is Element => el !== null);
+    if (!links.length || !targets.length) return;
+
+    function setActive(id: string) {
+      links.forEach((a) => {
+        const isActive = a.getAttribute('href') === '#' + id;
+        if (isActive) {
+          a.setAttribute('aria-current', 'true');
+          try {
+            a.scrollIntoView({ inline: 'center', block: 'nearest' });
+          } catch (e) {}
+        } else {
+          a.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    // Without IO there is no spy — the tabs remain plain working anchors.
+    if (!('IntersectionObserver' in window)) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        let best: IntersectionObserverEntry | null = null;
+        entries.forEach((entry) => {
+          if (
+            entry.isIntersecting &&
+            (!best || entry.intersectionRatio > best.intersectionRatio)
+          ) {
+            best = entry;
+          }
+        });
+        if (best?.target.id) setActive(best.target.id);
+      },
+      { rootMargin: '-30% 0px -60% 0px', threshold: [0, 0.1, 0.25, 0.5] },
+    );
+    targets.forEach((target) => io.observe(target));
+  })();
+</script>

@@ -1,12 +1,56 @@
 ---
 import '../styles/global.css';
 import Topbar from '../components/Topbar.astro';
+import Footer from '../components/Footer.astro';
+import { profile } from '../data/profile';
+import { agentMarkdownUrl, profileUrl } from '../data/site';
 
 interface Props {
   title?: string;
+  description?: string;
+  canonical?: string;
 }
 
-const { title = 'Rahul Aithal' } = Astro.props;
+const {
+  title = `${profile.name} — ${profile.title}`,
+  description = `${profile.name} is a ${profile.title.toLowerCase()} in Bengaluru building backend systems, full-stack products, and AI tooling.`,
+  canonical = profileUrl,
+} = Astro.props;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@type': 'Person',
+    name: profile.name,
+    alternateName: profile.handle,
+    jobTitle: profile.title,
+    description: profile.summary,
+    email: `mailto:${profile.email}`,
+    url: profileUrl,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Bengaluru',
+      addressCountry: 'IN',
+    },
+    alumniOf: 'BNMIT CSE',
+    knowsAbout: [
+      'Full-stack development',
+      'Backend systems',
+      'Go',
+      'TypeScript',
+      'Node.js',
+      'React',
+      'MCP',
+      'LLM tooling',
+      'Docker',
+      'AWS',
+    ],
+    sameAs: profile.links
+      .filter((link) => !link.href.startsWith('mailto:'))
+      .map((link) => link.href),
+  },
+};
 ---
 
 <html lang="en">
@@ -14,21 +58,131 @@ const { title = 'Rahul Aithal' } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={profile.name} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+    <link
+      rel="alternate"
+      type="text/markdown"
+      title="AI-friendly profile"
+      href={agentMarkdownUrl}
+    />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    <script is:inline>
+      // Default to dark; a stored choice wins. Runs before first paint (no flash).
+      (function () {
+        document.documentElement.classList.add('js');
+        var theme = 'dark';
+        try {
+          var stored = localStorage.getItem('ra-theme');
+          if (stored === 'light' || stored === 'dark') theme = stored;
+        } catch (e) {}
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <div class="crt-scanlines pointer-events-none fixed inset-0 z-[9999]"></div>
-    <div class="crt-grain animate-grain pointer-events-none fixed -inset-[200%] opacity-40"></div>
-
+    <div id="spotlight" aria-hidden="true"></div>
     <Topbar />
 
-    <div class="mx-auto max-w-[900px] px-10 pb-20 max-[600px]:px-5 max-[600px]:pb-15">
-      <slot />
+    <div class="mx-auto max-w-[920px] px-8 pb-16 max-[600px]:px-5">
+      <main>
+        <slot />
+      </main>
+      <Footer />
     </div>
+
+    <script is:inline>
+      // Cursor spotlight — lerped radial glow, fine pointers only.
+      (function () {
+        var spot = document.getElementById('spotlight');
+        if (!spot) return;
+        if (!window.matchMedia('(pointer: fine)').matches) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        var root = document.documentElement;
+        var tx = window.innerWidth / 2;
+        var ty = 200;
+        var x = tx;
+        var y = ty;
+        var raf = 0;
+
+        function loop() {
+          x += (tx - x) * 0.12;
+          y += (ty - y) * 0.12;
+          root.style.setProperty('--spot-x', x + 'px');
+          root.style.setProperty('--spot-y', y + 'px');
+          if (Math.abs(tx - x) > 0.4 || Math.abs(ty - y) > 0.4) {
+            raf = requestAnimationFrame(loop);
+          } else {
+            raf = 0;
+          }
+        }
+
+        window.addEventListener(
+          'pointermove',
+          function (e) {
+            tx = e.clientX;
+            ty = e.clientY;
+            spot.classList.add('on');
+            if (!raf) raf = requestAnimationFrame(loop);
+          },
+          { passive: true },
+        );
+      })();
+    </script>
+
+    <script is:inline>
+      // Scroll reveals — progressive enhancement, IO-gated.
+      (function () {
+        var els = document.querySelectorAll('[data-reveal], .draw-in');
+        if (!els.length) return;
+        if (
+          !('IntersectionObserver' in window) ||
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ) {
+          els.forEach(function (el) {
+            el.classList.add('revealed');
+          });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+        );
+        els.forEach(function (el) {
+          io.observe(el);
+        });
+      })();
+    </script>
   </body>
 </html>

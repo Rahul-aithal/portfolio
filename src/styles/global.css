@@ -1,52 +1,60 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
+  --font-display: "Space Grotesk", "IBM Plex Sans", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
   --font-sans: "IBM Plex Sans", sans-serif;
 
-  /* surfaces — near-black, warmed slightly, with clearly stepped-up tiers
-     so cards actually separate from the page instead of blending into it */
-  --color-surface: oklch(12% 0.012 50);
-  --color-surface-2: oklch(17% 0.014 55);
-  --color-surface-hover: oklch(20% 0.016 55);
-  --color-watermark: oklch(18% 0.012 55);
-  --color-watermark-hover: oklch(22% 0.014 55);
+  /* blueprint-on-paper (light): warm sheet, deep schematic ink, blueprint blue */
+  --color-paper: oklch(96.5% 0.012 95);
+  --color-surface: oklch(99% 0.004 95);
+  --color-surface-2: oklch(93% 0.014 95);
 
-  /* text — a warm-tinted gray ramp, pulled brighter across the board so
-     body copy stays legible on the dark surfaces */
-  --color-ink: oklch(95% 0.006 85);
-  --color-ink-1: oklch(82% 0.008 85);
-  --color-ink-2: oklch(68% 0.007 85);
-  --color-ink-3: oklch(58% 0.007 82);
-  --color-ink-4: oklch(50% 0.007 80);
-  --color-dim: oklch(60% 0.008 80);
-  --color-dimmer: oklch(38% 0.008 75);
+  --color-ink: oklch(27% 0.032 255);
+  --color-ink-1: oklch(38% 0.034 255);
+  --color-ink-2: oklch(49% 0.03 252);
+  --color-muted: oklch(59% 0.026 250);
+  --color-faint: oklch(72% 0.02 250);
 
-  --color-line: oklch(32% 0.014 65);
-  --color-line-hover: oklch(42% 0.018 62);
+  --color-line: oklch(82% 0.022 250);
+  --color-line-strong: oklch(32% 0.04 255);
 
-  /* accents — vivid phosphor amber (primary) + a brighter teal-green signal
-     tone standing in for the old acid-green. Still not neon, but no longer
-     so desaturated it reads as gray */
-  --color-amber: oklch(80% 0.17 72);
-  --color-amber-dim: oklch(58% 0.13 72);
-  --color-signal: oklch(78% 0.14 175);
+  /* accents */
+  --color-blue: oklch(52% 0.165 260);
+  --color-blue-deep: oklch(42% 0.15 262);
+  --color-blue-wash: oklch(94% 0.032 262);
+  --color-stamp: oklch(57% 0.19 28);
 
-  /* "latest" project wash + badge — more saturated so it clearly reads as
-     a distinct, highlighted card rather than a slightly-darker one */
-  --color-wash: oklch(18% 0.05 72);
-  --color-wash-hover: oklch(21% 0.055 72);
-  --color-wash-line: oklch(30% 0.08 72);
-  --color-wash-line-hover: oklch(38% 0.09 72);
-  --color-badge: oklch(20% 0.09 72);
-  --color-badge-line: oklch(38% 0.12 72);
-
-  --color-tag-line: oklch(28% 0.015 60);
+  --grid-strength: 7%;
 
   --animate-blink: blink 2s ease-in-out infinite;
   --animate-blink-fast: blink 1s step-end infinite;
   --animate-fade-up: fade-up 0.5s ease forwards;
-  --animate-grain: grain 0.5s steps(1) infinite;
+}
+
+/* terminal nod (dark, default): near-black warm sheet, amber phosphor accents */
+.dark {
+  --color-paper: oklch(13% 0.013 60);
+  --color-surface: oklch(18% 0.015 60);
+  --color-surface-2: oklch(22% 0.016 60);
+
+  --color-ink: oklch(93% 0.008 85);
+  --color-ink-1: oklch(80% 0.008 85);
+  --color-ink-2: oklch(68% 0.008 82);
+  --color-muted: oklch(58% 0.009 80);
+  --color-faint: oklch(40% 0.009 75);
+
+  --color-line: oklch(30% 0.016 65);
+  --color-line-strong: oklch(48% 0.02 70);
+
+  --color-blue: oklch(80% 0.16 75);
+  --color-blue-deep: oklch(82% 0.15 80);
+  --color-blue-wash: oklch(20% 0.05 75);
+  --color-stamp: oklch(72% 0.19 28);
+
+  --grid-strength: 10%;
 }
 
 @keyframes blink {
@@ -66,68 +74,175 @@
   }
 }
 
-@keyframes grain {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  10% {
-    transform: translate(-1%, -1%);
-  }
-  20% {
-    transform: translate(1%, 1%);
-  }
-  30% {
-    transform: translate(-2%, 0);
-  }
-  40% {
-    transform: translate(2%, -1%);
-  }
-  50% {
-    transform: translate(-1%, 2%);
-  }
-  60% {
-    transform: translate(1%, -2%);
-  }
-  70% {
-    transform: translate(2%, 1%);
-  }
-  80% {
-    transform: translate(-2%, 2%);
-  }
-  90% {
-    transform: translate(0, -2%);
+/* Anchor offset so the sticky header never covers a jumped-to section. */
+main section[id],
+#agent-brief-heading {
+  scroll-margin-top: 128px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-html {
-  scroll-behavior: smooth;
+/* Section tab-bar */
+.section-tab {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.45rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-ink-2);
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.section-tab:hover {
+  color: var(--color-blue-deep);
+}
+
+.section-tab-num {
+  font-size: 9.5px;
+  color: var(--color-faint);
+}
+
+.section-tab:hover .section-tab-num {
+  color: var(--color-blue);
+}
+
+.section-tab[aria-current="true"] {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.section-tab[aria-current="true"] .section-tab-num {
+  color: inherit;
+  opacity: 0.65;
 }
 
 body {
-  @apply bg-surface text-ink font-mono text-sm leading-relaxed min-h-screen overflow-x-hidden;
+  @apply bg-paper font-sans text-[15px] leading-relaxed text-ink-1 antialiased min-h-screen overflow-x-hidden;
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklch, var(--color-blue) var(--grid-strength), transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklch, var(--color-blue) var(--grid-strength), transparent) 1px,
+      transparent 1px
+    );
+  background-size: 28px 28px;
 }
 
-/* the two full-bleed CRT overlays — a repeating gradient and an SVG noise
-   texture. Left as plain CSS since Tailwind has no clean way to express a
-   generated background-image. */
-.crt-scanlines {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgb(0 0 0 / 0.08) 2px,
-    rgb(0 0 0 / 0.08) 4px
+/* cursor spotlight — position driven by JS via --spot-x/--spot-y */
+:root {
+  --spot-x: 50vw;
+  --spot-y: 20vh;
+  --spot-glow: color-mix(in oklch, var(--color-blue) 13%, transparent);
+}
+
+.dark {
+  --spot-glow: color-mix(in oklch, var(--color-blue) 17%, transparent);
+}
+
+#spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  background: radial-gradient(
+    340px circle at var(--spot-x) var(--spot-y),
+    var(--spot-glow),
+    transparent 70%
   );
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-.crt-grain {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+#spotlight.on {
+  opacity: 1;
+}
+
+/* scroll reveals — hidden only when JS runs (progressive enhancement) */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    translate 0.25s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.js [data-reveal].revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* animated underline sweep for links */
+.u-sweep {
+  position: relative;
+}
+
+.u-sweep::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  background: var(--color-blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.u-sweep:hover::after {
+  transform: scaleX(1);
+}
+
+/* press-down state for buttons */
+.btn-press {
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.btn-press:active {
+  transform: translateY(1px);
+}
+
+/* hero name underline draws itself in once revealed */
+.js .draw-in {
+  background-image: linear-gradient(to right, var(--color-blue) 100%, transparent 100%);
+  background-repeat: no-repeat;
+  background-position: 0 94%;
+  background-size: 0% 5px;
+  transition: background-size 0.9s ease 0.35s;
+  text-decoration: none;
+}
+
+.js .draw-in.revealed {
+  background-size: 100% 5px;
 }
 
 a:focus-visible,
-button:focus-visible {
-  @apply outline-2 outline-amber outline-offset-[3px];
+button:focus-visible,
+summary:focus-visible {
+  @apply outline-2 outline-blue outline-offset-[3px];
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -137,9 +252,17 @@ button:focus-visible {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
   }
-  .crt-grain {
-    animation: none;
-    opacity: 0.15;
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .js .draw-in {
+    background-size: 100% 5px;
+    transition: none;
+  }
+  #spotlight {
+    display: none;
   }
   .animate-blink,
   .animate-blink-fast {
