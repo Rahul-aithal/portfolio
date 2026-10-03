@@ -1,9 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <title>RA</title>
   <rect width="32" height="32" fill="#0a0a0a"/>
+  <g transform="translate(16 15.75) scale(0.78) translate(-16 -15.75)">
   <path fill="#ffb000" d="M3 9h8v2H3z M3 11h2v2H3z M11 11h2v2h-2z M3 13h2v2H3z M11 13h2v2h-2z M3 15h8v2H3z M3 17h2v2H3z M7 17h2v2H7z M3 19h2v2H3z M9 19h2v2h-2z M3 21h2v2H3z M11 21h2v2h-2z"/>
   <path fill="#ffb000" d="M17 9h6v2h-6z M15 11h2v2h-2z M23 11h2v2h-2z M15 13h2v2h-2z M23 13h2v2h-2z M15 15h10v2H15z M15 17h2v2h-2z M23 17h2v2h-2z M15 19h2v2h-2z M23 19h2v2h-2z M15 21h2v2h-2z M23 21h2v2h-2z"/>
   <rect x="27" y="9" width="2" height="14" fill="#ffb000">
     <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
   </rect>
+  </g>
 </svg>
