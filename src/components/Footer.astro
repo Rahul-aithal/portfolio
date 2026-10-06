@@ -1,5 +1,6 @@
 ---
 import { profile } from '../data/profile';
+import { agentMarkdownUrl, llmsFullTxtUrl, llmsTxtUrl } from '../data/site';
 
 interface Props {
   year?: number;
@@ -75,5 +76,14 @@ const iconPaths: Record<string, string> = {
     <div class="px-4 py-3 text-muted min-[601px]:border-l min-[601px]:border-line min-[601px]:text-right">
       Scale 1:1 — drawn & built by hand
     </div>
+    <nav
+      class="col-span-2 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-line px-4 py-3 text-muted max-[600px]:col-span-1"
+      aria-label="Machine-readable profile formats"
+    >
+      <span class="text-faint">For AI agents —</span>
+      <a href={agentMarkdownUrl} class="u-sweep transition-colors hover:text-blue-deep">{agentMarkdownUrl}</a>
+      <a href={llmsTxtUrl} class="u-sweep transition-colors hover:text-blue-deep">{llmsTxtUrl}</a>
+      <a href={llmsFullTxtUrl} class="u-sweep transition-colors hover:text-blue-deep">{llmsFullTxtUrl}</a>
+    </nav>
   </div>
 </footer>
