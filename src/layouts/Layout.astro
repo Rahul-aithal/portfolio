@@ -92,10 +92,14 @@ const structuredData = {
         } catch (e) {}
         document.documentElement.classList.toggle('dark', theme === 'dark');
         document.documentElement.style.colorScheme = theme;
+        var favicon = document.querySelector('link[data-theme-favicon]');
+        if (favicon) favicon.href = theme === 'light' ? '/favicon-light.svg' : '/favicon.svg';
       })();
     </script>
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- No-JS fallback matches the no-JS page (light); the pre-paint script
+         immediately swaps it to the stored/default theme's favicon. -->
+    <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" data-theme-favicon />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

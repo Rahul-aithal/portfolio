@@ -114,6 +114,8 @@ import SectionNav from './SectionNav.astro';
   themeToggle?.addEventListener('click', () => {
     const isDark = document.documentElement.classList.toggle('dark');
     document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+    const favicon = document.querySelector<HTMLLinkElement>('link[data-theme-favicon]');
+    if (favicon) favicon.href = isDark ? '/favicon.svg' : '/favicon-light.svg';
     try {
       localStorage.setItem('ra-theme', isDark ? 'dark' : 'light');
     } catch (e) {}
