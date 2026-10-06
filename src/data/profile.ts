@@ -13,7 +13,7 @@ export const profile = {
   availability:
     'Available for full-time roles and internships in backend, full-stack, or developer tooling.',
   email: 'aithalrahul34@gmail.com',
-  education: 'BNMIT CSE · 8.9 CGPA',
+  education: 'BNMIT CSE · Final Year',
   summary:
     'Final-year CS student who builds things to understand how they work. Backend systems, full-stack products, the occasional low-level rabbit hole. Currently a Frontend Developer intern at XParth Technologies, learning Go properly, and building with MCP and LLM tooling.',
   links: [
