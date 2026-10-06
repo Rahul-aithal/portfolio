@@ -11,6 +11,14 @@ const stackSummary = skillGroups
   .map((group) => `- **${group.label}:** ${group.lines.join(' · ')}`)
   .join('\n');
 
+const canonicalLinks = profile.links
+  .map((link) =>
+    link.href.startsWith('mailto:')
+      ? `- [${link.label}](mailto:${profile.email})`
+      : `- [${link.label}](${link.href})`,
+  )
+  .join('\n');
+
 const sectionLinks = agentSections
   .map((section) => `- [${section.title}](/agent/${section.slug}.md)`)
   .join('\n');
@@ -38,10 +46,7 @@ ${profile.availability}
 
 ## Canonical links
 
-- [GitHub](https://github.com/Rahul-aithal)
-- [LinkedIn](https://www.linkedin.com/in/rahul-aithal-b67b5b253/)
-- [Medium](https://medium.com/@aithalrahul34)
-- [Email](mailto:${profile.email})
+${canonicalLinks}
 
 ## Documents
 

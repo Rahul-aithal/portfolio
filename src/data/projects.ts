@@ -25,9 +25,19 @@ export interface Project {
  */
 export const projects: Project[] = [
   {
+    num: "06",
+    name: "Vaultr",
+    featured: true,
+    story:
+      "A file-sharing platform built around limits that actually mean something — <strong>GitHub OAuth</strong>, expiry dates, download caps, and a real-time dashboard on top of object storage. Shipped <strong>8 versioned releases</strong> while iterating on it.",
+    tags: ["Next.js 16", "TypeScript", "Tailwind", "Radix UI", "PostgreSQL", "Drizzle ORM", "MinIO", "Docker", "GitHub Actions"],
+    links: [
+      { label: "code ↗", href: "https://github.com/Rahul-aithal/vaultr" },
+    ],
+  },
+  {
     num: "04",
     name: "EventMCP",
-    featured: true,
     story:
       "Built during exam season, which is probably the worst time to build a scheduler — and also exactly why I did. It's a <strong>Google Calendar MCP server written in Go</strong>: add, list, delete events straight from any MCP-compatible client. OAuth2 auth, refresh token persistence, typed tool definitions. No vibe coding — I actually read the MCP Go SDK. Released three versions already.",
     tags: ["Go", "MCP", "Google Calendar API", "OAuth2", "stdio transport"],
@@ -36,10 +46,23 @@ export const projects: Project[] = [
     ],
   },
   {
+    num: "05",
+    name: "WhatsApp Newsletter Bot",
+    story:
+      "A <strong>Node.js/TypeScript bot built on Baileys</strong> that sends structured newsletters to WhatsApp groups through a REST API — so updates go out cleanly without anyone hand-pasting walls of text.",
+    tags: ["Node.js", "TypeScript", "Baileys", "REST API"],
+    links: [
+      {
+        label: "code ↗",
+        href: "https://github.com/Rahul-aithal/WA_Newslatter_Bot",
+      },
+    ],
+  },
+  {
     num: "01",
     name: "InkWell",
     story:
-      "Wanted to understand how real-time systems work, so I built a blogging platform around it. <strong>RabbitMQ for async notifications</strong>, Cloudinary for media, JWT auth — the kind of project where you keep pulling one thread and end up building a lot more than you planned.",
+      "Wanted to understand how real-time systems work, so I built a storytelling platform around it. <strong>RabbitMQ for async notifications</strong>, Cloudinary for media, JWT auth — the kind of project where you keep pulling one thread and end up building a lot more than you planned.",
     tags: ["Node.js", "Express", "MongoDB", "RabbitMQ", "React", "Docker"],
     links: [
       { label: "open ↗", href: "https://ink-well-client.vercel.app/" },
@@ -60,8 +83,8 @@ export const projects: Project[] = [
     num: "03",
     name: "ThumbPicker",
     story:
-      "My first real Go project. Wraps FFmpeg to pull frames out of video files from the command line. Simple enough to finish, complex enough to teach me something. Now adding <strong>goroutines</strong> for batch processing — really just an excuse to learn Go's concurrency model properly.",
-    tags: ["Go", "FFmpeg", "goroutines"],
+      "My first real Go project. Started as a CLI that wraps FFmpeg to pull frames out of video files — simple enough to finish, complex enough to teach me something. Has since grown into a <strong>full web service</strong>: HTTP routing, PostgreSQL with <strong>sqlc</strong>, and server-rendered UI with <strong>templ</strong>.",
+    tags: ["Go", "FFmpeg", "PostgreSQL", "sqlc", "templ", "HTTP"],
     links: [
       { label: "code ↗", href: "https://github.com/Rahul-aithal/ThumbPicker" },
     ],
