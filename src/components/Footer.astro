@@ -31,28 +31,6 @@ const iconPaths: Record<string, string> = {
         Get in touch
         <span class="text-faint group-hover:text-blue" aria-hidden="true">↗</span>
       </a>
-      <button
-        type="button"
-        data-agent-copy
-        class="btn-press group inline-flex min-h-9 items-center gap-2.5 border-2 border-line-strong bg-surface px-4 py-2 text-[11px] font-semibold text-ink-2 transition-colors hover:border-blue hover:text-blue-deep"
-        aria-label="Copy complete profile as Markdown for AI agents"
-      >
-        <svg
-          width="12"
-          height="12"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-        <span data-agent-copy-label aria-live="polite">Copy profile</span>
-      </button>
     </div>
     <nav class="flex items-center gap-2" aria-label="Contact links">
       {
@@ -99,42 +77,3 @@ const iconPaths: Record<string, string> = {
     </div>
   </div>
 </footer>
-
-<script>
-  function fallbackCopy(text: string) {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.setAttribute('readonly', '');
-    textarea.style.position = 'fixed';
-    textarea.style.left = '-9999px';
-    document.body.append(textarea);
-    textarea.select();
-
-    const copied = document.execCommand('copy');
-    textarea.remove();
-
-    if (!copied) throw new Error('Copy command failed');
-  }
-
-  const copyButton = document.querySelector<HTMLButtonElement>('[data-agent-copy]');
-  const copyLabel = copyButton?.querySelector<HTMLElement>('[data-agent-copy-label]');
-  const defaultLabel = 'Copy profile';
-
-  copyButton?.addEventListener('click', async () => {
-    const brief = document.getElementById('agent-brief');
-    if (!brief || !copyLabel) return;
-    try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(brief.textContent ?? '');
-      } else {
-        fallbackCopy(brief.textContent ?? '');
-      }
-      copyLabel.textContent = 'Copied ✓';
-    } catch {
-      copyLabel.textContent = 'Failed';
-    }
-    window.setTimeout(() => {
-      copyLabel.textContent = defaultLabel;
-    }, 2200);
-  });
-</script>

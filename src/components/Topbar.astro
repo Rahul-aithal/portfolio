@@ -17,6 +17,18 @@ import SectionNav from './SectionNav.astro';
     <div class="flex items-center gap-2.5 text-ink-2">
       <button
         type="button"
+        data-topbar-copy
+        class="btn-press flex min-h-9 cursor-pointer items-center gap-2 border-2 border-line-strong bg-surface px-3 text-ink-2 hover:border-blue hover:text-blue-deep"
+        aria-label="Copy complete profile as Markdown for AI agents"
+      >
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span data-topbar-copy-label aria-live="polite">Copy</span>
+      </button>
+      <button
+        type="button"
         data-theme-toggle
         class="btn-press flex min-h-9 min-w-9 cursor-pointer items-center justify-center border-2 border-line-strong bg-surface px-2 text-ink-2 hover:border-blue hover:text-blue-deep"
         aria-label="Toggle light and dark theme"
@@ -53,6 +65,43 @@ import SectionNav from './SectionNav.astro';
   }
   tick();
   setInterval(tick, 1000);
+
+  function fallbackCopy(text: string) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    document.body.append(textarea);
+    textarea.select();
+
+    const copied = document.execCommand('copy');
+    textarea.remove();
+
+    if (!copied) throw new Error('Copy command failed');
+  }
+
+  const copyButton = document.querySelector<HTMLButtonElement>('[data-topbar-copy]');
+  const copyLabel = copyButton?.querySelector<HTMLElement>('[data-topbar-copy-label]');
+  const defaultLabel = 'Copy';
+
+  copyButton?.addEventListener('click', async () => {
+    const brief = document.getElementById('agent-brief');
+    if (!brief || !copyLabel) return;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(brief.textContent ?? '');
+      } else {
+        fallbackCopy(brief.textContent ?? '');
+      }
+      copyLabel.textContent = 'Copied ✓';
+    } catch {
+      copyLabel.textContent = 'Failed';
+    }
+    window.setTimeout(() => {
+      copyLabel.textContent = defaultLabel;
+    }, 2200);
+  });
 
   const themeToggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
 
